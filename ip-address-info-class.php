@@ -15,20 +15,20 @@ class getIpInfo {
 
 	public function __construct(){
 		$this->ip = $this->get_client_ip();
-		$this->country_code = (string) $this->get_ip_info()->CountryCode;
-		$this->country_name = (string) $this->get_ip_info()->CountryName;
-		$this->region_code = (string) $this->get_ip_info()->RegionCode;
-		$this->region_name = (string) $this->get_ip_info()->RegionName;
-		$this->city = (string) $this->get_ip_info()->City;
-		$this->zip_code = (string) $this->get_ip_info()->ZipCode;
-		$this->time_zone = (string) $this->get_ip_info()->TimeZone;
-		$this->latitude = (string) $this->get_ip_info()->Latitude;
-		$this->longitude = (string) $this->get_ip_info()->Longitude;
-		$this->metro_code = (string) $this->get_ip_info()->MetroCode;
+		$this->country_code = (string) $this->get_ip_info($this->ip)->CountryCode;
+		$this->country_name = (string) $this->get_ip_info($this->ip)->CountryName;
+		$this->region_code = (string) $this->get_ip_info($this->ip)->RegionCode;
+		$this->region_name = (string) $this->get_ip_info($this->ip)->RegionName;
+		$this->city = (string) $this->get_ip_info($this->ip)->City;
+		$this->zip_code = (string) $this->get_ip_info($this->ip)->ZipCode;
+		$this->time_zone = (string) $this->get_ip_info($this->ip)->TimeZone;
+		$this->latitude = (string) $this->get_ip_info($this->ip)->Latitude;
+		$this->longitude = (string) $this->get_ip_info($this->ip)->Longitude;
+		$this->metro_code = (string) $this->get_ip_info($this->ip)->MetroCode;
 	}
 
-	private function get_ip_info(){
-		$result_file = simplexml_load_file('https://freegeoip.net/xml/' . $this->ip);
+	private function get_ip_info($client_ip){
+		$result_file = simplexml_load_file('https://freegeoip.net/xml/' . $client_ip);
 		return $result_file;
 	}
 
@@ -53,6 +53,16 @@ class getIpInfo {
 
 	public function set_ip($new_ip){
 		$this->ip = $new_ip;
+		$this->country_code = (string) $this->get_ip_info($new_ip)->CountryCode;
+		$this->country_name = (string) $this->get_ip_info($new_ip)->CountryName;
+		$this->region_code = (string) $this->get_ip_info($new_ip)->RegionCode;
+		$this->region_name = (string) $this->get_ip_info($new_ip)->RegionName;
+		$this->city = (string) $this->get_ip_info($new_ip)->City;
+		$this->zip_code = (string) $this->get_ip_info($new_ip)->ZipCode;
+		$this->time_zone = (string) $this->get_ip_info($new_ip)->TimeZone;
+		$this->latitude = (string) $this->get_ip_info($new_ip)->Latitude;
+		$this->longitude = (string) $this->get_ip_info($new_ip)->Longitude;
+		$this->metro_code = (string) $this->get_ip_info($new_ip)->MetroCode;
 	}
 }
 
